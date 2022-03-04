@@ -1,3 +1,5 @@
+import { ethers } from 'ethers'
+
 export async function requestAccount() {
   if (!window.ethereum) {
     return {
@@ -18,4 +20,14 @@ export async function requestAccount() {
       error: e.message,
     }
   }
+}
+
+export async function requestBalance() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+
+  const { result } = await requestAccount()
+
+  const balance = await provider.getBalance(result)
+
+  return { balance: ethers.utils.formatEther(balance) }
 }

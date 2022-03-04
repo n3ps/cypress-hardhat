@@ -1,15 +1,19 @@
 import { useState } from 'react'
-import { requestAccount } from '../blockchain'
+import { requestAccount, requestBalance } from '../blockchain'
 
 function GetAccount() {
-  const [text, setText] = useState('- Result goes here -')
+  const [text, setText] = useState('')
   const [error, setError] = useState()
+  const [balance, setBalance] = useState('')
 
   const handleClick = async () => {
     const { result, error } = await requestAccount()
 
+    const balanceResult = await requestBalance()
+
     if (result) {
       setText(result)
+      setBalance(balanceResult.balance)
       setError('')
     } else if (error) {
       setText('')
@@ -34,9 +38,12 @@ function GetAccount() {
       )}
 
       {text && (
-        <p data-testid="result" className="text-green-700 font-bold">
-          {text}
-        </p>
+        <div>
+          <p className="text-green-700 font-bold">
+            Address: <span data-testid="result">{text}</span>
+          </p>
+          <p className="text-green-700 font-bold">Balance: {balance}</p>
+        </div>
       )}
     </div>
   )
