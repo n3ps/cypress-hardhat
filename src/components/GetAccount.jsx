@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import { requestAccount, requestBalance } from '../blockchain'
+
+import { useState } from 'react'
 
 function GetAccount() {
   const [text, setText] = useState('')

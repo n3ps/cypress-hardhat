@@ -1,18 +1,18 @@
-import { requestCBWalletUser } from '../blockchain'
+import { requestDeployContract } from '../blockchain'
 import { useState } from 'react'
 
-function FetchUser() {
-  const [user, setUser] = useState('')
+function DeployContract() {
+  const [contractResults, setContractResults] = useState('')
   const [error, setError] = useState()
 
   const handleClick = async () => {
-    const { user, error } = await requestCBWalletUser()
+    const { contractResults, error } = await requestDeployContract()
 
-    if (user) {
-      setUser(user)
+    if (contractResults) {
+      setContractResults(contractResults)
       setError('')
     } else if (error) {
-      setUser('')
+      setContractResults('')
       setError(error)
     }
   }
@@ -23,7 +23,7 @@ function FetchUser() {
         className="btn btn-primary"
         onClick={handleClick}
       >
-        Get User
+        Deploy Contract
       </button>
 
       {error && (
@@ -32,13 +32,15 @@ function FetchUser() {
         </p>
       )}
 
-      {user && (
+      {contractResults && (
         <div>
-          <p className="text-green-700 font-bold">User: {user}</p>
+          <p className="text-green-700 font-bold">
+            Contract Results: {contractResults}
+          </p>
         </div>
       )}
     </div>
   )
 }
 
-export default FetchUser
+export default DeployContract
