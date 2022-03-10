@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import { bytecode, abi } from './contractInteface'
+import { bytecode, abi } from './contractInterface'
 
 export async function requestAccount() {
   if (!window.ethereum) {
