@@ -1,0 +1,40 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/Users/lenonlopez/projects/cypress-hardhat/contracts/cryptopunksmarket.sol": {
+      "lastModificationDate": 1646869321631,
+      "contentHash": "9490742ce3f49b61e9e2a9198def4da5",
+      "sourceName": "contracts/cryptopunksmarket.sol",
+      "solcConfig": {
+        "version": "0.4.11",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.4.8"
+      ],
+      "artifacts": [
+        "CryptoPunksMarket"
+      ]
+    }
+  }
+}

@@ -2,6 +2,7 @@ import CallContract from './components/CallContract'
 import DeployContract from './components/DeployContract'
 import FetchUser from './components/Fetchuser'
 import GetAccount from './components/GetAccount'
+import GetTokenOwner from './components/GetTokenOwner'
 
 function App() {
   return (
@@ -20,9 +21,13 @@ function App() {
 
       <DeployContract />
 
-      <p>Step 4: Call web3 contract</p>
+      <p>Step 4: Assign first token</p>
 
       <CallContract />
+
+      <p>Step 5: Get address of token owner</p>
+
+      <GetTokenOwner />
     </div>
   )
 }
