@@ -28,8 +28,6 @@ function FetchUser({ address }) {
     }
   }
 
-  console.log({ address, userData, error, cbWalletUser })
-
   return (
     <div className="flex gap-4">
       <button
