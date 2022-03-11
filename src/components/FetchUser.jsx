@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import { findOrCreateUser, getMessageToSign } from '../mapi'
+import { signMessage } from '../blockchain'
 
-function FetchUser({ input }) {
-  const [message, setMessage] = useState(null)
+function FetchUser({ address }) {
   const [userData, setUserData] = useState(null)
   const [error, setError] = useState()
 
   const handleClick = async () => {
     try {
-      await getMessageToSign().then(setMessage)
-      await findOrCreateUser(input).then(setUserData)
+      const message = await getMessageToSign()
+      const signature = await signMessage(message)
+      await findOrCreateUser({ address, message, signature }).then(setUserData)
     } catch (e) {
-      setError(e)
+      setError(e.message)
     }
   }
 
@@ -27,12 +28,8 @@ function FetchUser({ input }) {
         </p>
       )}
 
-      {userData && message && (
+      {userData && (
         <div>
-          <p className="text-green-700 font-bold">
-            Message:&nbsp;
-            <span data-testid="result">{message}</span>
-          </p>
           <p className="text-green-700 font-bold">
             Id:&nbsp;
             <span data-testid="result">{userData.user.id}</span>
