@@ -11,7 +11,12 @@ function fetchAPI({ queryId, body }) {
     body,
     method: 'POST',
     mode: 'cors',
-  }).then((res) => res.json())
+  }).then((res) => {
+    if (!res.ok || res.status !== 200) {
+      throw new Error(res.statusText)
+    }
+    return res.json()
+  })
 }
 
 export async function findOrCreateUser(input) {
