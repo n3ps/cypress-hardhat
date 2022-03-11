@@ -31,3 +31,10 @@ export async function requestBalance() {
 
   return { balance: ethers.utils.formatEther(balance) }
 }
+
+export async function signMessage(message) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum)
+  const signer = provider.getSigner()
+
+  return await signer.signMessage(message)
+}
