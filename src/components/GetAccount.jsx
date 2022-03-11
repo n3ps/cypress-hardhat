@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { requestAccount, requestBalance } from '../blockchain'
 
-function GetAccount() {
+function GetAccount({ onAddress }) {
   const [text, setText] = useState('')
   const [error, setError] = useState()
   const [balance, setBalance] = useState('')
@@ -13,6 +13,7 @@ function GetAccount() {
 
     if (result) {
       setText(result)
+      onAddress(result)
       setBalance(balanceResult.balance)
       setError('')
     } else if (error) {
