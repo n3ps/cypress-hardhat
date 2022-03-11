@@ -1,33 +1,21 @@
+import { requestCBWalletUser } from '../blockchain'
 import { useState } from 'react'
-import { findOrCreateUser, getMessageToSign } from '../mapi'
-import { signMessage, requestCBWalletUser } from '../blockchain'
 
-function FetchUser({ address }) {
-  const [cbWalletUser, setCBWalletUser] = useState('')
-  const [userData, setUserData] = useState(null)
+function FetchUser() {
+  const [user, setUser] = useState('')
   const [error, setError] = useState()
 
   const handleClick = async () => {
-    try {
-      const { user, error } = await requestCBWalletUser()
-      if (error) {
-        throw new Error(error)
-      }
-      setCBWalletUser(user)
+    const { user, error } = await requestCBWalletUser()
 
-      if (!address) {
-        throw new Error('Missing account')
-      }
-
-      const message = await getMessageToSign()
-      const signature = await signMessage(message)
-      await findOrCreateUser({ address, message, signature }).then(setUserData)
-    } catch (e) {
-      setError(e.message)
-      setCBWalletUser('')
+    if (user) {
+      setUser(user)
+      setError('')
+    } else if (error) {
+      setUser('')
+      setError(error)
     }
   }
-
   return (
     <div className="flex gap-4">
       <button
@@ -35,7 +23,7 @@ function FetchUser({ address }) {
         className="btn btn-primary"
         onClick={handleClick}
       >
-        Get User
+        Get CB Wallet User
       </button>
 
       {error && (
@@ -44,24 +32,9 @@ function FetchUser({ address }) {
         </p>
       )}
 
-      {cbWalletUser && (
+      {user && (
         <div>
-          <p className="text-green-700 font-bold">
-            CB Wallet User: {cbWalletUser}
-          </p>
-        </div>
-      )}
-
-      {userData && (
-        <div>
-          <p className="text-green-700 font-bold">
-            Id:&nbsp;
-            <span data-testid="result">{userData.user.id}</span>
-          </p>
-          <p className="text-green-700 font-bold">
-            Username:&nbsp;
-            <span data-testid="result">{userData.user.profile.username}</span>
-          </p>
+          <p className="text-green-700 font-bold">User: {user}</p>
         </div>
       )}
     </div>
