@@ -1,7 +1,9 @@
 import { useState } from 'react'
-import GetAccount from './components/GetAccount'
-import FetchUser from './components/FetchUser'
 import CallContract from './components/CallContract'
+import DeployContract from './components/DeployContract'
+import FetchUser from './components/Fetchuser'
+import GetAccount from './components/GetAccount'
+import GetTokenOwner from './components/GetTokenOwner'
 
 function App() {
   const [address, setAddress] = useState('')
@@ -18,9 +20,17 @@ function App() {
 
       <FetchUser address={address} />
 
-      <p>Step 3: Call web3 contract</p>
+      <p>Step 3: Deploy web3 contract</p>
+
+      <DeployContract />
+
+      <p>Step 4: Assign first token</p>
 
       <CallContract />
+
+      <p>Step 5: Get address of token owner</p>
+
+      <GetTokenOwner />
     </div>
   )
 }

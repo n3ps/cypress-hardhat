@@ -1,12 +1,12 @@
-import { requestContractResults } from '../blockchain'
+import { getOwnerOfToken } from '../blockchain'
 import { useState } from 'react'
 
-function CallContract() {
+function GetTokenOwner() {
   const [contractResults, setContractResults] = useState('')
   const [error, setError] = useState()
 
   const handleClick = async () => {
-    const { contractResults, error } = await requestContractResults()
+    const { contractResults, error } = await getOwnerOfToken(0)
 
     if (contractResults) {
       setContractResults(contractResults)
@@ -23,7 +23,7 @@ function CallContract() {
         className="btn btn-primary"
         onClick={handleClick}
       >
-        Call Contract
+        Get Token Owner
       </button>
 
       {error && (
@@ -43,4 +43,4 @@ function CallContract() {
   )
 }
 
-export default CallContract
+export default GetTokenOwner

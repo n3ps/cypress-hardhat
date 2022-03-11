@@ -1,12 +1,12 @@
-import { requestContractResults } from '../blockchain'
+import { requestDeployContract } from '../blockchain'
 import { useState } from 'react'
 
-function CallContract() {
+function DeployContract() {
   const [contractResults, setContractResults] = useState('')
   const [error, setError] = useState()
 
   const handleClick = async () => {
-    const { contractResults, error } = await requestContractResults()
+    const { contractResults, error } = await requestDeployContract()
 
     if (contractResults) {
       setContractResults(contractResults)
@@ -23,7 +23,7 @@ function CallContract() {
         className="btn btn-primary"
         onClick={handleClick}
       >
-        Call Contract
+        Deploy Contract
       </button>
 
       {error && (
@@ -43,4 +43,4 @@ function CallContract() {
   )
 }
 
-export default CallContract
+export default DeployContract
