@@ -23,7 +23,7 @@ function FetchUser() {
         className="btn btn-primary"
         onClick={handleClick}
       >
-        Get User
+        Get CB Wallet User
       </button>
 
       {error && (
