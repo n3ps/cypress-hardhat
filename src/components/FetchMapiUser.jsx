@@ -15,6 +15,7 @@ function FetchUser({ address }) {
       const message = await getMessageToSign()
       const signature = await signMessage(message)
       await findOrCreateUser({ address, message, signature }).then(setUserData)
+      setError()
     } catch (e) {
       setError(e.message)
     }
